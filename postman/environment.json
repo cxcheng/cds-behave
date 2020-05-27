@@ -1,0 +1,14 @@
+{
+	"id": "eb1f912b-b0d5-4281-b338-a17e83802f91",
+	"name": "Localhost 8000",
+	"values": [
+		{
+			"key": "url",
+			"value": "http://localhost:8000",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2020-05-27T15:36:13.424Z",
+	"_postman_exported_using": "Postman/7.25.0"
+}

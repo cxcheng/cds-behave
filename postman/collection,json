@@ -19,10 +19,28 @@
 		{
 			"name": "Upload seed_users",
 			"request": {
-				"method": "GET",
+				"method": "POST",
 				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/Users/calvin_cheng/python/cucumber/seed_users.csv",
+							"disabled": true
+						}
+					]
+				},
 				"url": {
-					"raw": ""
+					"raw": "{{url}}/users/upload",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"users",
+						"upload"
+					]
 				}
 			},
 			"response": []
