@@ -25,6 +25,7 @@ def step_impl(context, ncols):
 
 
 @given(u'I upload CSV with the following text')
+@then(u'I upload CSV with the following text')
 def step_impl(context):
     context.csv_text = context.text
     upload_file(context)
@@ -44,10 +45,10 @@ def step_impl(context):
     assert hasattr(context, "rs") and context.rs == HTTPStatus.OK
 
 
-@then(u'I can find uploaded users')
+@then(u'I can find all users according to the rows')
 def step_impl(context):
-    return
-    raise NotImplementedError(u'STEP: Then I can find uploaded users')
+    fetch_users(context, minSalary=0, maxSalary=4000, offset=0,limit=30, sort="+id")
+    check_users_against_table(context)
 
 
 @then(u'I get failure')

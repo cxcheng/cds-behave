@@ -10,7 +10,7 @@ Feature: Upload CSV
       | ID 2 | LOGIN 2 | Comma'd User 2, 1 | 3000.00 |
       | ID 3 | LOGIN 3 | Comma'd User 3, 1 | 4000.00 |
     Then I get success
-    Then I can find uploaded users
+    Then I can find all users according to the rows
 
   Scenario: Upload same good CSV twice
     Given I upload CSV with the following rows
@@ -20,10 +20,10 @@ Feature: Upload CSV
       | ID 2 | LOGIN 2 | Comma'd User 2, 1 | 3000.00 |
       | ID 3 | LOGIN 3 | Comma'd User 3, 1 | 4000.00 |
     Then I get success
-    Then I can find uploaded users
+    Then I can find all users according to the rows
     Then I upload the file with different salary
     Then I get success
-    Then I can find uploaded users
+    Then I can find all users according to the rows
 
   Scenario Outline: Upload CSV with wrong number of columns
     Given I upload CSV with <ncols> instead of 4 columns
@@ -55,3 +55,17 @@ Feature: Upload CSV
         """
       Then I get failure
 
+    Scenario: Upload of partially bad CSV should have all changes rolled back
+      Given I upload CSV with the following rows
+        | id   | login   | name              | salary  |
+        | ID 0 | LOGIN 0 | Comma'd User 0, 1 | 1000.00 |
+      Then I get success
+      Then I upload CSV with the following text
+        """
+        id,name,login,salary
+        # Good file with comments
+        id 0,login 0,Ron Weasley,29234.5
+        id 1,login 1,Ron Weasley the Imposter,29234.5ab
+        """
+      Then I get failure
+      Then I can find all users according to the rows
