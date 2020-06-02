@@ -23,7 +23,7 @@ Feature: Upload CSV
     Then I can find all users according to the rows
     Then I upload the file with different salary
     Then I get success
-    Then I can find all users according to the rows
+    Then I can find all users according to the rows but with different salary
 
   Scenario Outline: Upload CSV with wrong number of columns
     Given I upload CSV with <ncols> instead of 4 columns

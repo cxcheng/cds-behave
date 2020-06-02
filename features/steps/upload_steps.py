@@ -50,6 +50,10 @@ def step_impl(context):
     fetch_users(context, minSalary=0, maxSalary=4000, offset=0,limit=30, sort="+id")
     check_users_against_table(context)
 
+@then(u'I can find all users according to the rows but with different salary')
+def step_impl(context):
+    fetch_users(context, minSalary=0, maxSalary=4000, offset=0,limit=30, sort="+id")
+    check_users_against_table(context, check_salary=False)
 
 @then(u'I get failure')
 def step_impl(context):
