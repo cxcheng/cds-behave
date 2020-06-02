@@ -68,12 +68,14 @@ def check_users_against_table(context, check_salary=True):
             assert "id" in result
             if csv_user["id"] == result["id"]:
                 if check_salary:
-                    assert csv_user["salary"] == result["salary"]
+                    assert csv_user["salary"] == result["salary"],\
+                        "Expected salary {}, got {}".format(csv_user["salary"], result["salary"])
                 assert csv_user["login"] == result["login"] \
                     and csv_user["name"] == result["name"]
                 found_user = True
                 break
-        assert found_user, "User {} expected, but not in {}".format(csv_user, context.rs_json["results"])
+        assert found_user,\
+            "Expected user {} from original upload, but missing from {}".format(csv_user, context.rs_json["results"])
         
 
 
